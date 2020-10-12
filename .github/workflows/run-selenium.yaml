@@ -13,7 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/cache/.venv
+
       - name: run
         run: |
           echo Add other actions to build,
           ./runner.sh
+          mv dist/.venv ~/cache
