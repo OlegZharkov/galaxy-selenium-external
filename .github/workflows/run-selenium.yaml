@@ -18,6 +18,9 @@ jobs:
         with:
           path: |
             ~/cache/.venv
+          key: ${{ runner.os }}-selenium
+
+
 
       - name: run
         run: |
