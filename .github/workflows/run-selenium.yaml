@@ -1,0 +1,19 @@
+name: Selenium Runner
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  super-lint:
+    name: Lint code base
+    runs-on: ubuntu-20.04
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: run
+        run: |
+          echo Add other actions to build,
+          ./runner.sh
