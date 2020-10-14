@@ -5,8 +5,7 @@ from os.path import isfile, join
 import pytest
 from io import StringIO
 
-filename = "dist/lib/galaxy_test/selenium/test_admin_app.py"
-galaxy_root_dir = "dist/"
+galaxy_root_dir = "galaxy/"
 selenium_test_dir = "lib/galaxy_test/selenium/"
 
 test_dir_path = galaxy_root_dir + selenium_test_dir
