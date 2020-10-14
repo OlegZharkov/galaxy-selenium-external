@@ -19,10 +19,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/cache/.venv
+            ~/.local/
           key: ${{ runner.os }}-selenium
-
-
 
       - name: run
         run: |
