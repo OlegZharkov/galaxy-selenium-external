@@ -25,8 +25,8 @@ jobs:
 
       - name: Dump GitHub context
         env:
-           GITHUB_CONTEXT: ${{ tojson(github) }}
-           ENVIRONMENT: ${{ github.event.deployment.environment }}
+#           GITHUB_CONTEXT: ${{ tojson(github) }}
+           ENVIRONMENT: ${{ github.event.client_payload.galaxy_selenium_test_path }}
         run: |
            echo "$GITHUB_CONTEXT"
            echo $ENVIRONMENT
