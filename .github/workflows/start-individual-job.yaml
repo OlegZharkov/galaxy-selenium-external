@@ -24,6 +24,10 @@ jobs:
             galaxy/.venv/
           key: ${{ runner.os }}-selenium
 
-      - name: run
-        run: |
-          source run.sh
+     - name: Dump GitHub context
+       env:
+          GITHUB_CONTEXT: ${{ tojson(github) }}
+          ENVIRONMENT: ${{ github.event.deployment.environment }}
+       run: |
+          echo "$GITHUB_CONTEXT"
+          echo $ENVIRONMENT
