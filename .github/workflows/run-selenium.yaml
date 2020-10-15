@@ -24,6 +24,4 @@ jobs:
 
       - name: run
         run: |
-          pip install pytest
-          pip install -r galaxy/requirements.txt
-          python test_parser.py
+          ./run.sh
