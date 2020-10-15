@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/.local/
+            galaxy/.venv/
           key: ${{ runner.os }}-selenium
 
       - name: run
