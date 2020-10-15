@@ -25,10 +25,6 @@ jobs:
           key: ${{ runner.os }}-selenium
 
       - name: run
-        uses: muinmomin/webhook-action@v1.0.0
-#        with:
-#          url: ${{ secrets.WEBHOOK_URL }}
-#          data: "{'command': 'publish'}"
         run: |
           sudo apt-get update && sudo apt-get install python3-venv -y
           source run.sh
