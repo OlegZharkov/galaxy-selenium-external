@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isfile, join
 import pytest
 from io import StringIO
-from io import environ
+from os import environ
 import requests
 
 galaxy_root_dir = "galaxy/"
@@ -51,8 +51,6 @@ selenium_tests = []
 for test_file in test_files:
     selenium_tests += get_individual_tests(test_dir_path + test_file)
 
-
-
 for selenium_test_path in selenium_tests:
     raw_data = """{
      "event_type": "test-repository-dispatch",
@@ -61,6 +59,7 @@ for selenium_test_path in selenium_tests:
       }
     }""" % selenium_test_path
     x = requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
-                  headers={"Authorization": "token %s" % environ['API_KEY']},
-                  data=raw_data
-                  )
+                      headers={"Authorization": "token %s" % environ['API_KEY']},
+                      data=raw_data
+                      )
+    print(x)
