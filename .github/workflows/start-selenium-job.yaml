@@ -28,7 +28,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install python3-venv -y
           source run.sh
-          curl --location --request POST --url 'https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches' --header 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' --header 'Accept: application/vnd.github.everest-preview+json' --header 'Content-Type: application/json' --data-raw '{
+          curl --location --request POST --url 'https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches' --header 'Authorization: token ${{ secrets.KEY }}' --header 'Accept: application/vnd.github.everest-preview+json' --header 'Content-Type: application/json' --data-raw '{
             "event_type": "test-repository-dispatch",
             "client_payload": {
               "unit": false,
