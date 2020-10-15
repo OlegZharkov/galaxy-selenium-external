@@ -26,11 +26,11 @@ def is_admin(filename):
         return False
 
 
-def get_individual_tests(filename):
+def get_individual_tests(test_file_path):
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
 
-    pytest.main(["--co", "-q", "--disable-pytest-warnings", filename])
+    pytest.main(["--co", "-q", "--disable-pytest-warnings", test_file_path])
 
     sys.stdout = old_stdout
 

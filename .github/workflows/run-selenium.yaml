@@ -26,4 +26,4 @@ jobs:
 
       - name: run
         run: |
-          ./run.sh
+          source run.sh

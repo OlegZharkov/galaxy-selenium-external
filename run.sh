@@ -1,9 +1,7 @@
 #!/bin/bash
 # Prepare
-python -m venv
-. galaxy/.venv/bin/activate
-pip install pytest
-pip install -r galaxy/requirements.txt
+python -m venv galaxy/.venv
 
-# Run
+source "galaxy/.venv/bin/activate" # activate virtualenv
+pip install -r galaxy/lib/galaxy/dependencies/dev-requirements.txt && pip install -r galaxy/requirements.txt
 python test_parser.py
