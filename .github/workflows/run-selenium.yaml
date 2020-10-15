@@ -4,10 +4,12 @@ name: Selenium Runner
 on: push
 
 jobs:
-  super-lint:
+  run-selenium:
     name: Selenium Run
     runs-on: ubuntu-20.04
-
+    strategy:
+          matrix:
+            python-version: [3.8]
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
