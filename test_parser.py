@@ -43,7 +43,8 @@ def get_individual_tests(test_file_path):
             parts = line.split("::")
             test_name = f'{parts[1]}.{parts[2]}'
             test_path = f'{parts[0]}:{test_name}'
-            current_available_tests.append({test_name, test_path })
+
+            current_available_tests.append((test_name, test_path))
 
     return current_available_tests
 
