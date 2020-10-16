@@ -30,4 +30,4 @@ jobs:
            GALAXY_TEST_SELENIUM_USER_PASSWORD: ${{ ${{ secrets.GALAXY_TEST_SELENIUM_USER_PASSWORD }} }}
         run: |
            echo $GALAXY_SELENIUM_TEST
-           cd galaxy && GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium $GALAXY_SELENIUM_TEST
+           cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium $GALAXY_SELENIUM_TEST
