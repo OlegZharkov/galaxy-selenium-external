@@ -53,7 +53,9 @@ test_files = [f for f in listdir(test_root_dir) if isfile(join(test_root_dir, f)
 
 selenium_tests = []
 for test_file in test_files:
-    selenium_tests += get_individual_tests(test_root_dir + test_file)
+    path = test_root_dir + test_file
+    if not is_admin(path):
+        selenium_tests += get_individual_tests(path)
 
 for test_name, test_path in selenium_tests:
     raw_data = """{
@@ -62,6 +64,7 @@ for test_name, test_path in selenium_tests:
         "galaxy_selenium_test_path": "%s"
       }
     }""" % (test_name, test_path)
+
     # Auth token as an argument
     requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
                       headers={"Authorization": "token %s" % sys.argv[1]},
