@@ -6,6 +6,7 @@ import pytest
 from io import StringIO
 from os import environ
 import requests
+import sys
 
 galaxy_root_dir = "galaxy/"
 selenium_test_dir = "lib/galaxy_test/selenium/"
@@ -58,8 +59,8 @@ for selenium_test_path in selenium_tests:
         "galaxy_selenium_test_path": "%s"
       }
     }""" % selenium_test_path
-    x = requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
-                      headers={"Authorization": "token %s" % environ['API_KEY']},
+    # Auth token as an argument
+    requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
+                      headers={"Authorization": "token %s" % sys.argv[1]},
                       data=raw_data
                       )
-    print(x)

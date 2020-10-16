@@ -25,8 +25,6 @@ jobs:
           key: ${{ runner.os }}-selenium
 
       - name: run
-        env:
-          API_KEY: ${{ secrets.KEY }}'
         run: |
           sudo apt-get update && sudo apt-get install python3-venv -y
-          source run.sh
+          source run.sh ${{ secrets.KEY }}'
