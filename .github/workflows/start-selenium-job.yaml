@@ -27,4 +27,4 @@ jobs:
       - name: run
         run: |
           sudo apt-get update && sudo apt-get install python3-venv -y
-          source run.sh ${{ secrets.KEY }}'
+          source run.sh ${{ secrets.KEY }}
