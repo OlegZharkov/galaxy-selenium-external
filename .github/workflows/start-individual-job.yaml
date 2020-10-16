@@ -1,4 +1,4 @@
-name: Selenium Runner
+name: ${{ github.event.client_payload.galaxy_selenium_test_path }}
 
 on:
   repository_dispatch
@@ -23,10 +23,9 @@ jobs:
             galaxy/.venv/
           key: ${{ runner.os }}-selenium
 
-      - name: Dump GitHub context
+      - name: Run ${{ github.event.client_payload.galaxy_selenium_test_path }}
         env:
-#           GITHUB_CONTEXT: ${{ tojson(github) }}
-           ENVIRONMENT: ${{ github.event.client_payload.galaxy_selenium_test_path }}
+           GALAXY_SELENIUM_TEST: ${{ github.event.client_payload.galaxy_selenium_test_path }}
         run: |
-           echo "$GITHUB_CONTEXT"
-           echo $ENVIRONMENT
+           echo $GALAXY_SELENIUM_TEST
+           cd galaxy && GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium $GALAXY_SELENIUM_TEST
