@@ -11,7 +11,7 @@ import sys
 galaxy_root_dir = "galaxy/"
 selenium_test_dir = "lib/galaxy_test/selenium/"
 
-test_dir_path = galaxy_root_dir + selenium_test_dir
+test_root_dir = galaxy_root_dir + selenium_test_dir
 
 
 # https://stackoverflow.com/a/44699395/4870846
@@ -41,24 +41,26 @@ def get_individual_tests(test_file_path):
     for line in mystdout.getvalue().splitlines():
         if selenium_test_dir in line:
             parts = line.split("::")
-            current_available_tests.append(f'{parts[0]}:{parts[1]}.{parts[2]}')
+            test_name = f'{parts[1]}.{parts[2]}'
+            test_path = f'{parts[0]}:{test_name}'
+            current_available_tests.append({test_name, test_path })
 
     return current_available_tests
 
 
-test_files = [f for f in listdir(test_dir_path) if isfile(join(test_dir_path, f)) and f.startswith("test_")]
+test_files = [f for f in listdir(test_root_dir) if isfile(join(test_root_dir, f)) and f.startswith("test_")]
 
 selenium_tests = []
 for test_file in test_files:
-    selenium_tests += get_individual_tests(test_dir_path + test_file)
+    selenium_tests += get_individual_tests(test_root_dir + test_file)
 
-for selenium_test in selenium_tests:
+for test_name, test_path in selenium_tests:
     raw_data = """{
      "event_type": "%s",
       "client_payload": {
         "galaxy_selenium_test_path": "%s"
       }
-    }""" % (selenium_test, selenium_test)
+    }""" % (test_name, test_path)
     # Auth token as an argument
     requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
                       headers={"Authorization": "token %s" % sys.argv[1]},
