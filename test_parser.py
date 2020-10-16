@@ -52,13 +52,13 @@ selenium_tests = []
 for test_file in test_files:
     selenium_tests += get_individual_tests(test_dir_path + test_file)
 
-for selenium_test_path in selenium_tests:
+for selenium_test in selenium_tests:
     raw_data = """{
-     "event_type": "test-repository-dispatch",
+     "event_type": "%s",
       "client_payload": {
         "galaxy_selenium_test_path": "%s"
       }
-    }""" % selenium_test_path
+    }""" % (selenium_test, selenium_test)
     # Auth token as an argument
     requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
                       headers={"Authorization": "token %s" % sys.argv[1]},

@@ -1,4 +1,4 @@
-name: ${{ github.event.client_payload.galaxy_selenium_test_path }}
+name: Run ivdividual Selenium Test
 
 on:
   repository_dispatch
