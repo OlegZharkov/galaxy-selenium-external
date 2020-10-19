@@ -28,8 +28,8 @@ jobs:
 
       - id: prepare-tests
         run: |
-          TEST_VAR=$(source run.sh ${{ secrets.KEY }})
-          VAR={'\"include\"':$(echo $TEST_VAR)}
+
+          VAR={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}
           echo $VAR
           echo "::set-output name=matrix::$(echo $VAR)"
 
