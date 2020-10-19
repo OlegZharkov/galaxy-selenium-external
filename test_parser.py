@@ -45,7 +45,7 @@ def get_individual_tests(test_file_path):
             test_name = f'{parts[1]}.{parts[2]}'
             test_path = f'{parts[0]}:{test_name}'
 
-            current_available_tests.append({"project": test_name, "config": test_path})
+            current_available_tests.append({"project": test_name, "test_path": test_path})
 
     return current_available_tests
 

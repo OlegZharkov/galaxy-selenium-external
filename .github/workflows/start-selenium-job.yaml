@@ -34,7 +34,6 @@ jobs:
           echo "::set-output name=matrix::$(echo $VAR)"
 
   run-selenium-tests:
-    name: ${{fromJson(needs.prepare.outputs.matrix).config}}
     runs-on: ubuntu-20.04
     needs: prepare
     strategy:
@@ -48,6 +47,7 @@ jobs:
 
       - name: run
         env:
-          selenium-test: ${{ matrix.config }}
+          selenium-test: ${{ matrix.test_path }}
         run: |
           echo "$selenium-test"
+          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium $selenium-test
