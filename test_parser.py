@@ -57,7 +57,7 @@ for test_file in test_files:
     path = test_root_dir + test_file
     if not is_admin(path):
         selenium_tests += get_individual_tests(path)
-print(json.dumps(json.dumps(selenium_tests)))
+print(json.dumps(selenium_tests).replace('"', '\\"'))
 
 # for test_name, test_path in selenium_tests:
 #     raw_data = """{
