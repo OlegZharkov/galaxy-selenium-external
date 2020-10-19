@@ -54,8 +54,6 @@ jobs:
           key: ${{ runner.os }}-selenium
 
       - name: run
-        env:
-          selenium-test: ${{ matrix.test_path }}
         run: |
           echo "$selenium-test"
-          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium $selenium-test
+          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium ${{ matrix.test_path }}
