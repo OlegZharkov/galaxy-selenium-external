@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8]
-        selenium-tests: ${{fromJson(needs.job1.outputs.selenium_tests)}}
+        selenium-tests: ${{fromJson(needs.prepare-selenium-tests.outputs.selenium_tests)}}
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
