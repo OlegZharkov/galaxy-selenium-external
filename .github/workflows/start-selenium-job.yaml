@@ -34,6 +34,7 @@ jobs:
           echo "::set-output name=matrix::$(echo $VAR)"
 
   run-selenium-tests:
+    name: "Test:"
     runs-on: ubuntu-20.04
     needs: prepare
     strategy:
