@@ -10,6 +10,8 @@ jobs:
     strategy:
           matrix:
             python-version: [3.8]
+    outputs:
+      matrix: ${{ steps.prepare-tests.outputs.matrix }}
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
@@ -24,7 +26,7 @@ jobs:
             galaxy/.venv/
           key: ${{ runner.os }}-selenium
 
-      - name: run
+      - id: prepare-tests
         run: |
           TEST_VAR=$(source run.sh ${{ secrets.KEY }})
           echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
