@@ -29,6 +29,8 @@ jobs:
       - id: prepare-tests
         run: |
           TEST_VAR=$(source run.sh ${{ secrets.KEY }})
+          tests={\"include\":$TEST_VAR}"
+          echo $tests
           echo "::set-output name=matrix::{\"include\":$TEST_VAR}"
 
   run-selenium-tests:
