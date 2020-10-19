@@ -27,7 +27,7 @@ jobs:
       - name: run
         run: |
           TEST_VAR=$(source run.sh ${{ secrets.KEY }})
-          echo "::set-output name=selenium_tests:::{\"include\":$TEST_VAR}"
+          echo "::set-output name=selenium_tests::{\"include\":$TEST_VAR}"
 
 
   run-selenium-tests:
