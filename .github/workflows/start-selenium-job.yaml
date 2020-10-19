@@ -32,7 +32,8 @@ jobs:
   run-selenium-tests:
     name: Individual Test
     runs-on: ubuntu-20.04
-    strategy: ${{fromJson(needs.prepare-selenium-tests.outputs.matrix)}}
+    strategy:
+      matrix: ${{fromJson(needs.prepare-selenium-tests.outputs.matrix)}}
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
