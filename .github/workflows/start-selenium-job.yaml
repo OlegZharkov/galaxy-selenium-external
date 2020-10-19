@@ -4,7 +4,7 @@ name: Selenium Runner
 on: push
 
 jobs:
-  prepare-selenium-tests:
+  prepare:
     name: Selenium Run
     runs-on: ubuntu-20.04
     strategy:
@@ -33,7 +33,7 @@ jobs:
     name: Individual Test
     runs-on: ubuntu-20.04
     strategy:
-      matrix: ${{fromJson(needs.prepare-selenium-tests.outputs.matrix)}}
+      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
