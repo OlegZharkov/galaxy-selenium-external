@@ -26,13 +26,12 @@ jobs:
 
       - name: run
         run: |
-          sudo apt-get update && sudo apt-get install python3-venv -y
           TEST_VAR=$(source run.sh ${{ secrets.KEY }})
           echo "::set-output name=selenium_tests:::{\"include\":$TEST_VAR}"
 
 
   run-selenium-tests:
-    name: Selenium Run
+    name: Individual Test
     runs-on: ubuntu-20.04
     strategy:
       matrix:
