@@ -38,3 +38,14 @@ jobs:
       matrix:
         python-version: [3.8]
         selenium-tests: ${{fromJson(needs.job1.outputs.selenium_tests)}}
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: run
+        with:
+          selenium-test: ${{ matrix.selenium_tests }}
+        run: |
+          echo "$selenium-test"
