@@ -48,6 +48,6 @@ jobs:
 
       - name: run
         env:
-          selenium-test: ${{ matrix }}
+          selenium-test: ${{ matrix.config }}
         run: |
           echo "$selenium-test"
