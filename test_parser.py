@@ -57,6 +57,7 @@ for test_file in test_files:
     if not is_admin(path):
         selenium_tests += get_individual_tests(path)
 
+print(len(selenium_tests))
 for test_name, test_path in selenium_tests:
     raw_data = """{
      "event_type": "%s",
