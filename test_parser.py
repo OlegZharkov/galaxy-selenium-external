@@ -7,6 +7,7 @@ from io import StringIO
 from os import environ
 import requests
 import sys
+import json
 
 galaxy_root_dir = "galaxy/"
 selenium_test_dir = "lib/galaxy_test/selenium/"
@@ -44,7 +45,7 @@ def get_individual_tests(test_file_path):
             test_name = f'{parts[1]}.{parts[2]}'
             test_path = f'{parts[0]}:{test_name}'
 
-            current_available_tests.append((test_name, test_path))
+            current_available_tests.append(test_path)
 
     return current_available_tests
 
@@ -56,17 +57,17 @@ for test_file in test_files:
     path = test_root_dir + test_file
     if not is_admin(path):
         selenium_tests += get_individual_tests(path)
-
-for test_name, test_path in selenium_tests:
-    raw_data = """{
-     "event_type": "%s",
-      "client_payload": {
-        "galaxy_selenium_test_path": "%s"
-      }
-    }""" % (test_name, test_path)
-
-    # Auth token as an argument
-    requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
-                      headers={"Authorization": "token %s" % sys.argv[1]},
-                      data=raw_data
-                      )
+print(json.dumps(selenium_tests))
+# for test_name, test_path in selenium_tests:
+#     raw_data = """{
+#      "event_type": "%s",
+#       "client_payload": {
+#         "galaxy_selenium_test_path": "%s"
+#       }
+#     }""" % (test_name, test_path)
+#
+#     # Auth token as an argument
+#     requests.post(url="https://api.github.com/repos/OlegZharkov/galaxy-selenium-external/dispatches",
+#                       headers={"Authorization": "token %s" % sys.argv[1]},
+#                       data=raw_data
+#                       )

@@ -4,7 +4,7 @@ name: Selenium Runner
 on: push
 
 jobs:
-  run-selenium:
+  prepare-selenium-tests:
     name: Selenium Run
     runs-on: ubuntu-20.04
     strategy:
@@ -27,4 +27,14 @@ jobs:
       - name: run
         run: |
           sudo apt-get update && sudo apt-get install python3-venv -y
-          source run.sh ${{ secrets.KEY }}
+          TEST_VAR=$(source run.sh ${{ secrets.KEY }})
+          echo "::set-output name=selenium_tests::$TEST_VAR"
+
+
+  run-selenium-tests:
+    name: Selenium Run
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.8]
+        selenium-tests: ${{fromJson(needs.job1.outputs.selenium_tests)}}
