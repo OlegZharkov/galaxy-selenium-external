@@ -46,6 +46,13 @@ jobs:
         with:
           submodules: true
 
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            galaxy/.venv/
+          key: ${{ runner.os }}-selenium
+
       - name: run
         env:
           selenium-test: ${{ matrix.test_path }}
