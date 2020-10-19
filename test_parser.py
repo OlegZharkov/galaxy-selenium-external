@@ -57,7 +57,8 @@ for test_file in test_files:
     path = test_root_dir + test_file
     if not is_admin(path):
         selenium_tests += get_individual_tests(path)
-print(json.dumps(selenium_tests))
+print(str(selenium_tests))
+
 # for test_name, test_path in selenium_tests:
 #     raw_data = """{
 #      "event_type": "%s",
