@@ -48,6 +48,7 @@ jobs:
 
       - name: Cache multiple paths
         uses: actions/cache@v2
+        continue-on-error: true
         with:
           path: |
             galaxy/.venv/
@@ -55,5 +56,5 @@ jobs:
 
       - name: run
         run: |
-          echo "$selenium-test"
+          echo "${{ matrix.test_path }}"
           cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium ${{ matrix.test_path }}
