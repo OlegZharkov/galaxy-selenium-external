@@ -28,7 +28,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install python3-venv -y
           TEST_VAR=$(source run.sh ${{ secrets.KEY }})
-          echo "::set-output name=selenium_tests::$TEST_VAR"
+          echo "::set-output name=selenium_tests:::{\"include\":$TEST_VAR}"
 
 
   run-selenium-tests:
