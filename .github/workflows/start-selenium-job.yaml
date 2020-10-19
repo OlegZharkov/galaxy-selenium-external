@@ -1,50 +1,17 @@
-name: Selenium Runner
-
-# Run this workflow every time a new commit pushed to your repository
+name: build
 on: push
-
 jobs:
-  prepare:
-    name: Selenium Run
-    runs-on: ubuntu-20.04
-    strategy:
-          matrix:
-            python-version: [3.8]
+  job1:
+    runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.prepare-tests.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      # Checks out a copy of your repository on the ubuntu-latest machine
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-
-      - name: Cache multiple paths
-        uses: actions/cache@v2
-        with:
-          path: |
-            galaxy/.venv/
-          key: ${{ runner.os }}-selenium
-
-      - id: prepare-tests
-        run: |
-          TEST_VAR=$(source run.sh ${{ secrets.KEY }})
-          echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-
-  run-selenium-tests:
-    name: Individual Test
-    runs-on: ubuntu-20.04
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
     steps:
-      # Checks out a copy of your repository on the ubuntu-latest machine
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-
-      - name: run
-        env:
-          selenium-test: ${{ matrix }}
-        run: |
-          echo "$selenium-test"
+    - run: build
