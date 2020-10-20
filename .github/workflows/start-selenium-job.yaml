@@ -58,4 +58,4 @@ jobs:
         if: always()
         run: |
           echo "${{ matrix.test_path }}"
-          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://usegalaxy.org/ ./run_tests.sh -selenium ${{ matrix.test_path }}
+          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://test.usegalaxy.eu/ ./run_tests.sh -selenium ${{ matrix.test_path }}
