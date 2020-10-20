@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs: prepare
     strategy:
+      fail-fast: false
       matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
     name: ${{ matrix.project }}
     steps:
