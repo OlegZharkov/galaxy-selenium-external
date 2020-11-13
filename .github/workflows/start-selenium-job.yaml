@@ -62,4 +62,4 @@ jobs:
            GALAXY_TEST_TIMEOUT_MULTIPLIER: 10
         run: |
           echo "${{ matrix.test_path }}"
-          cd galaxy && ./run_tests.sh -selenium ${{ matrix.test_path }}
+          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 ./run_tests.sh -selenium ${{ matrix.test_path }}
