@@ -30,7 +30,6 @@ jobs:
         run: |
           TEST_VAR=$(source run.sh)
           VAR={\"include\":$(echo $TEST_VAR)}
-          echo $VAR
           echo "::set-output name=matrix::$(echo $VAR)"
 
   run-selenium-tests:
