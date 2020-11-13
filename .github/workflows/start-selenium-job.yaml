@@ -56,6 +56,11 @@ jobs:
           key: ${{ runner.os }}-selenium
 
       - name: run
+        env:
+           GALAXY_TEST_SELENIUM_USER_EMAIL: ${{ secrets.GALAXY_TEST_SELENIUM_USER_EMAIL }}
+           GALAXY_TEST_SELENIUM_USER_PASSWORD: ${{ secrets.GALAXY_TEST_SELENIUM_USER_PASSWORD }}
+           GALAXY_TEST_EXTERNAL: https://usegalaxy.eu/
+           GALAXY_TEST_TIMEOUT_MULTIPLIER: 10
         run: |
           echo "${{ matrix.test_path }}"
-          cd galaxy && GALAXY_SKIP_CLIENT_BUILD=1 GALAXY_TEST_EXTERNAL=https://test.usegalaxy.eu/ ./run_tests.sh -selenium ${{ matrix.test_path }}
+          cd galaxy && ./run_tests.sh -selenium ${{ matrix.test_path }}
